@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Rental Report</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            font-size: 12px;
+            padding: 30px;
+            background-color: #ffffff;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: #1a73e8;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 10px;
+        }
+        .customer-section {
+            margin-bottom: 30px;
+        }
+        .customer-name {
+            background-color: #1a73e8;
+            color: #fff;
+            padding: 8px 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            font-size: 11px;
+        }
+        th {
+            background-color: #e8f0fe;
+            color: #000;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+        td {
+            color: #444;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Rental Report</h1>
+
+    {% for item in customer_rentals %}
+    <div class="customer-section">
+        <div class="customer-name">{{ item.user.username }}</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Category</th>
+                    <th>Reservation Date</th>
+                    <th>Return Date</th>
+                    <th>Duration</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in item.rentals %}
+                <tr>
+                    <td>{{ booking.car_brand }} {{ booking.car_model }}</td>
+                    <td>{{ booking.car_category }}</td>
+                    <td>{{ booking.reservation_date }}</td>
+                    <td>{{ booking.return_date }}</td>
+                    <td>{{ booking.rental_duration }} days</td>
+                    <td>${{ booking.total_price }}</td>
+                    <td>{% if booking.status == "Booked" %}
+                            <span class="status-badge status-active">Active</span>
+                        {% else %}
+                            <span class="status-badge status-inactive">Completed</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</body>
+</html>

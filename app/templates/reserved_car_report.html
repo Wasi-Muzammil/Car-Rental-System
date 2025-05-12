@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reserved Cars Report</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            padding: 30px;
+            font-size: 12px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            color: #d32f2f;
+            border-bottom: 2px solid #d32f2f;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 8px;
+            font-size: 11px;
+        }
+        th {
+            background-color: #fbe9e7;
+            color: #d32f2f;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .category {
+            font-weight: bold;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reserved Cars Report</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Car ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Category</th>
+                <th>Transmission</th>
+                <th>Seats</th>
+                <th>Fuel Type</th>
+                <th>Price/Day</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in reserved_cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+                <td class="category">{{ car.category }}</td>
+                <td>{{ car.transmission }}</td>
+                <td>{{ car.seating_capacity }}</td>
+                <td>{{ car.fuel_type }}</td>
+                <td>${{ car.price_per_day }}</td>
+                <td>{% if car.available == "Not Available" %}
+                        <span class="status-badge status-active">Active</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

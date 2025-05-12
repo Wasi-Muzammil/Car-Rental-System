@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Car Rental System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+        <ul class="nav_list">
+            <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+            <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="nav-btn active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h1 class="title">Contact Us</h1>
+            <p class="subtitle">We'd love to hear from you! Reach out for inquiries or support.</p>
+            
+            <div class="contact-grid">
+
+                <!-- Contact Info -->
+                <div class="contact-card fade-in delay-1">
+                    <h2>Our Information</h2>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>R-00 , ABC Street, ABC City</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+92 300 0000000</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>contact@rentalsystem.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Monday - Friday: 8am - 8pm<br>
+                                Saturday: 9am - 6pm<br>
+                                Sunday: 10am - 4pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

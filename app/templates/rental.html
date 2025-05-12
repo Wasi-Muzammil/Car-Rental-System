@@ -1,0 +1,41 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='rental.css') }}">
+<h1 class="rent logo">Rental Information</h1>
+<div class="contents">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Car</th>
+                <th>Reservation Date</th>
+                <th>Return Date</th>
+                <th>Total Price</th>
+                <th>Rental Duration</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.username }}</td>
+                    <td>{{ booking.car_brand }} {{ booking.car_model }}</td>
+                    <td>{{ booking.reservation_date }}</td>
+                    <td>{{ booking.return_date }}</td>
+                    <td>${{ booking.total_price }}</td>
+                    <td>{{ booking.rental_duration }} Days</td>
+                    <td>
+                        {% if booking.status == "Booked" %}
+                            <span class="status-badge status-active">Booked</span>
+                        {% elif booking.status == "Not Booked" %}
+                            <span class="status-badge status-inactive">Completed</span>
+                        {% else %}
+                            <span class="status-badge">Unknown</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                    {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
