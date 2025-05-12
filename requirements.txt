@@ -7,7 +7,7 @@ WTForms==3.1.2
 Werkzeug==2.3.6
 Jinja2==3.1.3
 xhtml2pdf==0.2.11
-reportlab==4.0.7
+reportlab>=3.6.0
 itsdangerous==2.1.2
 python-dotenv==1.0.1
 asgiref==3.7.2
