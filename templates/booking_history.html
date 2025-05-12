@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='booking_history.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Rental History</title>
+</head>
+<body>
+  <header class="head">
+    <nav class="navbar">
+        <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+        <ul class="nav_list">
+            <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+            <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="nav-btn">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
+  <main class="rental-main">
+    <div class="heading">
+      <h1>Rental History</h1>
+      <p>View your past and current rentals</p>
+    </div>
+    <div class="div1"> 
+      <div class="rental-container">
+        <!-- Jinja2 for loop to render rental cards -->
+        {% for booking in bookings %}
+        <div class="rental-card">
+            <div class="rental-card-header">
+              <div class="rental-car-info">
+                <div class="rental-car-name">{{ booking.car_brand }} {{ booking.car_model }}</div>
+                <div class="rental-car-details">    
+                  <span>{{ booking.car_category }}</span>
+                  <span>•</span>
+                  <span>{{ booking.car_transmission }}</span>
+                  <span>•</span>
+                  <span>{{ booking.car_seating_capacity }} Seats</span>
+                </div>
+              </div>
+              <div class="rental-status">
+                {% if booking.status == "Booked" %}
+                    <span class="status-badge status-active">Active</span>
+                {% else %}
+                    <span class="status-badge status-inactive">Completed</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="rental-card-body">
+              <div class="rental-detail-group">
+                <label class="rental-detail-label">Reservation Date</label>
+                <div class="rental-detail-value">{{ booking.reservation_date }}</div>
+              </div>
+              <div class="rental-detail-group">
+                <label class="rental-detail-label">Return Date</label>
+                <div class="rental-detail-value">{{ booking.return_date }}</div>
+              </div>
+              <div class="rental-detail-group">
+                <label class="rental-detail-label">Username</label>
+                <div class="rental-detail-value">{{ booking.username }}</div>
+              </div>
+              <div class="rental-detail-group">
+                <label class="rental-detail-label">Rental Duration</label>
+                <div class="rental-detail-value">{{ booking.rental_duration }} Days</div>
+              </div>
+            </div>
+            <div class="rental-card-footer">
+                <label for="rental-price" class="rental-price">Total Price</label>
+              <div class="rental-price">${{ booking.total_price }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,269 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed","san-serif";
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.head{
+    display: flex;
+    background-color: transparent;
+    height: 85px;
+    width:100%;
+    flex-direction: column;
+    justify-content:flex-start;
+}
+
+.logo{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.logo:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgb(238, 255, 2), 0 0 20px rgb(255, 163, 57), 0 0 40px rgb(255, 69, 69), 0 0 80px rgb(111, 100, 255);
+    transform: translateY(-2px);
+}
+
+.navbar {
+    display: flex;
+    justify-content:space-between; 
+    background: #00ABE4;
+    padding: 15px;
+}
+
+.nav_list {
+    list-style: none;
+    display: flex;
+    gap: 140px;
+}
+
+.navbar ul li {
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    background-color:  rgb(136, 136, 240);
+    border-radius: 20px;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.navbar ul li:hover{
+    color: #fff;
+    text-shadow: 0 0 10px rgb(228, 58, 24), 0 0 20px rgb(255, 17, 17), 0 0 40px rgb(252, 143, 0), 0 0 80px rgb(21, 255, 0);
+    transform: translateY(-2px);
+}
+
+.navbar ul li a:hover {
+    background-color: #555;
+    border-radius: 20px;
+} 
+
+
+
+
+
+
+/* General Styles */
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(background);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 5rem 5%;
+    background:  rgb(146, 202, 240);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f7f7f7;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #0099ff;
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e1e7e7;
+    margin-bottom: 3rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.contact-card {
+    background: white;
+    
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.contact-card h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #3498db;
+    margin-top: 0.5rem;
+    border-radius: 2px;
+}
+
+/* Contact Info */
+.contact-info {
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+}
+
+.info-item h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.info-item p {
+    margin: 0;
+    color: #7f8c8d;
+    line-height: 1.5;
+}
+
+/* Social Links */
+.social-links h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav_list {
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+    
+    .contact-section {
+        padding: 3rem 1rem;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-card {
+        padding: 1.5rem;
+    }
+}

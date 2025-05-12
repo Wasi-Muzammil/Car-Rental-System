@@ -1,0 +1,121 @@
+.contents{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 50px;
+    grid-row-gap: 50px;
+}
+
+body {
+    background: var(--background);
+    display: flex;
+    background-color: transparent;
+    height: 85px;
+    width:100%;
+    flex-direction: column;
+    justify-content:flex-start;
+}
+.stat-card {
+    background: rgb(152, 206, 241);
+    box-shadow: rgb(67, 216, 221) 0px 0px 20px 0px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+.stat-card:hover {
+    transform: scale(1.05);
+    background-color: rgb(238, 85, 85);
+    box-shadow: rgb(238, 85, 85) 0px 0px 20px 0px;
+}
+.stat-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.stat-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+.stat-icon::before, .stat-icon::after {
+    content: '';
+    position: absolute;
+    background-color: #4CAF50;
+}
+.stat-icon::before {
+    top: 2px;
+    left: 7px;
+    width: 2px;
+    height: 12px;
+}
+.stat-icon::after {
+    top: 7px;
+    left: 4px;
+    width: 8px;
+    height: 2px;
+}
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.stat-description {
+    font-size: 14px;
+    color: #666;
+}
+.trend-up {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    position: relative;
+    margin-right: 5px;
+}
+.trend-up::before, .trend-up::after {
+    content: '';
+    position: absolute;
+    background-color: #4CAF50;
+    transition: transform 0.3s ease-in-out;
+}
+.trend-up::before {
+    top: 6px;
+    left: 2px;
+    width: 8px;
+    height: 2px;
+    transform: rotate(45deg);
+}
+.trend-up::after {
+    top: 6px;
+    left: 8px;
+    width: 8px;
+    height: 2px;
+    transform: rotate(-45deg);
+}
+.stat-card:hover .trend-up::before, .stat-card:hover .trend-up::after {
+    transform: rotate(0deg);
+}
+
+.logo{
+    text-decoration: none;
+    color: rgb(0, 115, 182);
+    font-size: 30px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.logo:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgb(238, 255, 2), 0 0 20px rgb(255, 163, 57), 0 0 40px rgb(255, 69, 69), 0 0 80px rgb(111, 100, 255);
+    transform: translateY(-2px);
+}
+
+.head{
+    display: inline-block;
+    text-align: center;
+    margin: 10px 10px -20px 10px;
+    border-radius: 30px;
+    background-color: #1ab8ec;
+    padding: 15px;
+}

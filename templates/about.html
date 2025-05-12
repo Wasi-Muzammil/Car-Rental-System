@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Car Rental System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/about.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Upper Navigation Bar -->
+    <nav class="navbar">
+        <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+        <ul class="nav_list">
+            <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+            <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="nav-btn">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Page Content -->
+    <section class="about-section">
+        <div class="container">
+          <h1 class="title">About</h1>
+          <div class="content">
+            <div class="text">
+              <p class="fade-in">
+                At Our<strong> Online Car Rental System</strong>, we believe renting a car should be simple, flexible, and affordable.
+                Whether you're heading out for a road trip, need a ride for business, or just exploring the city,
+                we offer a diverse fleet of vehicles to match your needs.
+              </p>
+              <p class="fade-in delay-1">
+                From sedans to luxury SUVs, all our cars are thoroughly inspected and maintained to ensure your safety and comfort.
+                Our booking system is quick and hassle-free—just search, book, and drive.
+              </p>
+              <p class="fade-in delay-2">
+                Join thousands of happy customers who rely on our rental system for their travel needs.
+                Our team is committed to delivering quality service and support, every mile of the way.
+              </p>
+            </div>
+            <div class="image-container slide-in">
+              <img src="/static/images/BMW m5.webp" alt="Car Rental"/>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>

@@ -1,0 +1,225 @@
+/* General Styles */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed","san-serif";
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+:root{
+  background: linear-gradient(0deg, #b5e4ff, #28dfff);
+  background: #e3f5ff;
+  background-size: 400% 400%;
+}
+
+.rental-main{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 6fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 40px;
+}
+
+.div1 { grid-area: 2 / 1 / 3 / 2;
+  display: flex;
+  justify-content: center;
+}
+
+.head{
+  display: flex;
+  /* background-color: rgb(12, 192, 87); */
+  background-color: transparent;
+  height: 85px;
+  width:100%;
+  flex-direction: column;
+  justify-content:flex-start;
+}
+
+.logo{
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.logo:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgb(238, 255, 2), 0 0 20px rgb(255, 163, 57), 0 0 40px rgb(255, 69, 69), 0 0 80px rgb(111, 100, 255);
+  transform: translateY(-2px);
+}
+
+.navbar {
+  display: flex;
+  justify-content:space-between; 
+  background-color: #00ABE4;
+  padding: 15px;
+}
+
+.nav_list {
+  list-style: none;
+  display: flex;
+  gap: 140px;
+}
+
+.navbar ul li {
+  display: inline-block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  background-color:  rgb(136, 136, 240);
+  border-radius: 20px;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+.navbar ul li:hover{
+  color: #fff;
+  text-shadow: 0 0 10px rgb(228, 58, 24), 0 0 20px rgb(255, 17, 17), 0 0 40px rgb(252, 143, 0), 0 0 80px rgb(21, 255, 0);
+  transform: translateY(-2px);
+}
+
+.navbar ul li a:hover {
+  background-color: #555;
+  border-radius: 20px;
+}
+
+.rental-container{
+  background-color: #e3ffff;
+  box-shadow: rgb(83, 184, 231) 0px 0px 20px 0px;
+  height: 500px;
+  width: 80%;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  overflow-y: scroll;
+}
+  
+.rental-card {
+    border: 1px solid #e5e7eb;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    height: 300px;
+  }
+  
+  .rental-card-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .rental-car-image {
+    width: 80px;
+    height: 80px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    margin-right: 16px;
+  }
+  
+  .rental-car-info {
+    flex: 1;
+  }
+  
+  .rental-car-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .rental-car-details {
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+  
+  .rental-status {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+.status-inactive {
+    background-color: #dc3545;
+    color: white;
+}
+
+  .status-active {
+    background-color: #dcfce7;
+    color: #16a34a;
+  }
+  
+  .rental-card-body {
+    padding: 30px;
+    border-bottom: 1px solid #e5e7eb;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .rental-detail-group {
+    display: flex;
+    margin-bottom: 12px;
+    flex-direction: column;
+  }
+  
+  .rental-detail-label {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .rental-detail-value {
+    font-size: 14px;
+    color: #1f2937;
+    font-weight: 500;
+  }
+  
+  .rental-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  .rental-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .rental-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+  

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='admin_base.css') }}">
+   <title>{% block title %}Admin Dashboard{% endblock %}</title>
+</head>
+<body>
+    <header class="head">
+        <div class="logo">
+            <h1 class="admin">ADMIN DASHBOARD</h1>
+        </div>
+    </header> 
+    <main class="content">
+        <nav class="sidebar_navbar">
+            <ul class="sidebar_nav_list">
+                <li><a href="{{ url_for('admin.analytics') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/analytics.png') }}" alt="icon"></span>Analytics</a></li>
+                <li><a href="{{ url_for('admin.cars') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/vehicle.png') }}" alt="icon"></span>Cars</a></li>
+                <li><a href="{{ url_for('admin.rental') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/car-rental.png') }}" alt="icon"></span>Rental</a></li>
+                <li><a href="{{ url_for('admin.customers') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/personal.png') }}" alt="icon"></span>Customers</a></li>
+                <li><a href="{{ url_for('admin.rental_report_pdf') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/report.png') }}" alt="icon"></span>Rental Report</a></li>
+                <li><a href="{{ url_for('admin.reserved_cars_pdf') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/activities.png') }}" alt="icon"></span>Cars Report</a></li>
+                <li><a href="{{ url_for('main.main') }}" id="icons"><span><img src="{{ url_for('static', filename='images/icons/logout.png') }}" alt="icon"></span>Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Content Block -->
+        <div class="content_container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <h2 class="foot_text">© 2025 Car Rental System. All rights reserved.</h2>
+        </div>
+    </footer>
+</body>
+<script>
+    setTimeout(function() {
+      const flashMessages = document.getElementById('flash-messages');
+      if (flashMessages) {
+        flashMessages.style.opacity = '0';
+        setTimeout(() => flashMessages.style.display = 'none', 500);
+      }
+    }, 3000);
+  </script>
+</html>

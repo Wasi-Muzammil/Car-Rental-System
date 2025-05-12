@@ -1,0 +1,27 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Analytics - Admin Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='analytics.css') }}">
+
+<h1 class="rent logo">Analytics</h1>
+<div class="contents">
+    <div class="stat-card">
+        <div class="stat-title">Total Revenue <span><img src="{{ url_for('static', filename='images/icons/revenue.png') }}" alt="icon"></span></div>
+        <div class="stat-value">${{ total_revenue }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-title">Available Cars <span><img src="{{ url_for('static', filename='images/icons/car.png') }}" alt="icon"></span></div>
+        <div class="stat-value">{{ available_cars }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-title">Active Rentals <span><img src="{{ url_for('static', filename='images/icons/activities.png') }}" alt="icon"></span></div>
+        <div class="stat-value">{{ active_rentals }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-title">Total Customers <span><img src="{{ url_for('static', filename='images/icons/customer-satisfaction.png') }}" alt="icon"></span></div>
+        <div class="stat-value">{{ total_customers }}</div>
+    </div>
+</div>
+{% endblock %}

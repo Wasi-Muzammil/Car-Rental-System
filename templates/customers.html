@@ -1,0 +1,65 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='customers.css') }}">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+<h1 class="rent logo">Customers Information</h1>
+<div class="contents">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Registration Date</th>
+                <th>Account Balance</th>
+                <th>Booking Info</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.date }}</td>
+                <td>${{ user.balance }}</td>
+                <td>
+                    {% if user.booking_info == "Booked" %}
+                        <span class="status-badge status-active">Booked</span>
+                    {% else %}
+                        <span class="status-badge status-inactive">Not Booked</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="actions">
+                        <!-- Form to delete the user -->
+                        <form method="POST" action="{{ url_for('admin.delete_user') }}" style="display: inline;">
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <button type="submit" title="Delete User" class="delete-button">
+                                <img src="{{ url_for('static', filename='images/icons/delete.png') }}" alt="delete">
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

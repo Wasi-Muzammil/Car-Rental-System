@@ -1,0 +1,76 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cars.css') }}">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+<h1 class="rent logo">Cars Information</h1>
+<div class="add_car_button"><a href="{{ url_for('admin.add_car') }}"><button class="button button-primary"><img src="/static/images/add.png" alt="">Add Car</button></a></div>
+<div class="contents">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Category</th>
+                <th>Price Per Day</th>
+                <th>Available</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.category }}</td>
+                <td>${{ car.price_per_day }}</td>
+                <td>
+                    {% if car.available == 'Available' %}
+                        <span class="status-badge status-active">Available</span>
+                    {% else %}
+                        <span class="status-badge status-inactive">Not Available</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="actions">
+                        <a href="{{ url_for('admin.car_view', car_id=car.id) }}" style="display: inline;">
+                            <button type="button" title="View Car Details" class="action-button">
+                                <img src="{{ url_for('static', filename='images/icons/visual.png') }}" alt="view">
+                            </button>
+                        </a>
+                        <a href="{{ url_for('admin.edit_car_form', car_id=car.id) }}" style="display: inline;">
+                            <button type="button" title="Edit Car" class="action-button">
+                                <img src="{{ url_for('static', filename='images/icons/edit.png') }}" alt="edit">
+                            </button>
+                        </a>
+                        <!-- Form to delete the user -->
+                        <form method="POST" action="{{ url_for('admin.delete_car') }}" style="display: inline;">
+                            <input type="hidden" name="car_id" value="{{ car.id }}">
+                            <button type="submit" title="Delete Car" class="action-button">
+                                <img src="{{ url_for('static', filename='images/icons/delete.png') }}" alt="delete">
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
