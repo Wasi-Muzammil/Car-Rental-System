@@ -1,8 +1,10 @@
+# api/index.py
+
+from asgiref.wsgi import WsgiToAsgi
 from app import create_app
 
-# This is the actual Flask app
-app = create_app()
+flask_app = create_app()
+asgi_app = WsgiToAsgi(flask_app)
 
-# Vercel expects this to be named "handler"
-def handler(request, response):
-    return app(request.scope, request.receive, request.send)
+# Vercel looks for a variable called `handler`
+handler = asgi_app
