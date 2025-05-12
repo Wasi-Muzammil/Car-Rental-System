@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car.brand }} {{ car.model }} - Car Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/details page.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="head">
+        <nav class="navbar">
+            <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+            <ul class="nav_list">
+                <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+                <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+                <li><a href="{{ url_for('main.contact') }}" class="nav-btn">Contact</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class="logout">Login</a></li>
+                <li><a href="{{ url_for('auth.logout') }}" class="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="flash">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="toast-container">
+                {% for category, message in messages %}
+                    <div class="toast {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <main class="parent">
+        <div class="info_container">
+            <div class="lg-col-span-2">
+                <!-- Car Image -->
+                <div class="rounded-lg overflow-hidden mb-6">
+                    <img src="{{ url_for('static', filename='images/' + car.image) }}" 
+                         alt="{{ car.brand }} {{ car.model }}" 
+                         class="w-full h-auto object-cover">
+                </div>
+    
+                <!-- Car Details -->
+                <div class="mb-6">
+                    <!-- Car Name and Category -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h1 class="text-3xl font-bold">{{ car.brand }} {{ car.model }}</h1>
+                        <div class="badge">{{ car.category }}</div>
+                    </div>
+    
+                    <!-- Car Description -->
+                    <p class="text-muted-foreground mb-6" style="color: rgb(41, 36, 36);">{{ car.description }}</p>
+    
+                    <!-- Car Specifications Grid -->
+                    <div class="grid grid-cols-2 md-grid-cols-4 gap-4 mb-6">
+                        <!-- Year -->
+                        <div class="bg-muted rounded-lg p-4">
+                            <div class="text-sm text-muted-foreground">Year</div>
+                            <div class="font-medium">{{ car.year }}</div>
+                        </div>
+    
+                        <!-- Seats -->
+                        <div class="bg-muted rounded-lg p-4">
+                            <div class="text-sm text-muted-foreground">Seats</div>
+                            <div class="font-medium">{{ car.seating_capacity }}</div>
+                        </div>
+    
+                        <!-- Transmission -->
+                        <div class="bg-muted rounded-lg p-4">
+                            <div class="text-sm text-muted-foreground">Transmission</div>
+                            <div class="font-medium">{{ car.transmission }}</div>
+                        </div>
+    
+                        <!-- Fuel Type -->
+                        <div class="bg-muted rounded-lg p-4">
+                            <div class="text-sm text-muted-foreground">Fuel Type</div>
+                            <div class="font-medium">{{ car.fuel_type }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking_container">
+            <div class="card">
+                <div class="p-6">
+                    <!-- Price per Day -->
+                    <div class="text-2xl font-bold mb-6">
+                        ${{ price_per_day }} <span class="text-sm font-normal text-muted-foreground">per day</span>
+                    </div>
+                    
+                    <!-- Pick-up and Return Date Inputs -->
+                    <form method="POST" class="space-y-4 mb-6" action="{{ url_for('car.car_details', car_id=car.id) }}">
+                        <input type="hidden" name="form_action" value="calculate_total">
+                        <div>
+                            <label for="reservation_date" class="text-sm font-medium mb-1 block">Reservation Date</label>
+                            <input type="date" name="reservation_date" class="date-input"  value="{{ reservation_date }}">
+                        </div>
+                        <div>
+                            <label for="return_date" class="text-sm font-medium mb-1 block">Return Date</label>
+                            <input type="date" name="return_date" class="date-input" required onchange="this.form.submit()" value="{{ return_date }}" >
+                        </div>
+                    </form>
+
+                    <!-- Rental Details -->
+                    <div class="space-y-2 mb-6">
+                        <div class="flex justify-between">
+                            <span>Rental Duration</span>
+                            <span>{{ rental_duration if rental_duration else 0 }} days</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Price per Day</span>
+                            <span>${{ price_per_day }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Account Balance</span>
+                            <span>${{ balance }}</span>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="flex justify-between font-bold">
+                            <span>Total</span>
+                            <span>${{ total_price if total_price else "0.00" }}</span>
+                        </div>
+                    </div>
+    
+                    <form method="POST" action="{{ url_for('car.car_details', car_id=car.id) }}">
+                        <input type="hidden" name="reservation_date" value="{{ reservation_date_str }}">
+                        <input type="hidden" name="return_date" value="{{ return_date_str }}">
+                        <button type="submit" name="form_action" class="rent-button" value="rent_now">Rent Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    window.onload = function() {
+      const toasts = document.querySelectorAll('.toast');
+      toasts.forEach(function(toast) {
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(-100%)';
+          setTimeout(() => toast.remove(), 500); // remove after animation
+        }, 2500); // 3 seconds
+      });
+    };
+  </script> 
+</html>

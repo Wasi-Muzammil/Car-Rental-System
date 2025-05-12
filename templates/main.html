@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Rental Car System</title>
+</head>
+<body>
+    <header class="head">
+        <nav class="navbar">
+            <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+            <ul class="nav_list">
+                <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+                <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+                <li><a href="{{ url_for('main.contact') }}" class="nav-btn">Contact</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class="logout">Login</a></li>
+                <li><a href="{{ url_for('auth.logout') }}" class="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="toast-container">
+                {% for category, message in messages %}
+                    <div class="toast {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="content">
+        <nav class="sidebar_navbar">
+            <ul class="sidebar_nav_list">
+                <li><a id="icons" href="{{ url_for('main.main', category='sedan') }}" class="category-btn {% if selected_category == 'sedan' %}active{% endif %}"><span><img src="{{ url_for('static', filename='images/icons/sedan.png') }}" alt="icon" class="icons_icon"></span>Sedan</a></li>
+                <li><a id="icons" href="{{ url_for('main.main', category='suv') }}" class="category-btn {% if selected_category == 'suv' %}active{% endif %}"><span><img src="{{ url_for('static', filename='images/icons/automobile.png') }}" alt="icon" class="icons_icon"></span>SUV</a></li>
+                <li><a id="icons" href="{{ url_for('main.main', category='hatchback') }}" class="category-btn {% if selected_category == 'hatchback' %}active{% endif %}"><span><img src="{{ url_for('static', filename='images/icons/hatchback.png') }}" alt="icon" class="icons_icon"></span>Hatchback</a></li>
+                <li><a id="icons" href="{{ url_for('main.main', category='luxury') }}" class="category-btn {% if selected_category == 'luxury' %}active{% endif %}"><span><img src="{{ url_for('static', filename='images/icons/luxury.png') }}" alt="icon" class="icons_icon"></span>Luxury</a></li>
+                <li><a id="icons" href="{{ url_for('payment.payment')}}" class="category-btn" ><span><img src="{{ url_for('static', filename='images/icons/wallet.png') }}" alt="icon" class="icons_icon"></span>Balance Wallet</a></li>
+                <li><a id="icons" href="{{ url_for('car.booking_history')}}" class="category-btn" ><span><img src="{{ url_for('static', filename='images/icons/rental_history.png') }}" alt="icon" class="icons_icon"></span>Rental History</a></li>
+            </ul>
+        </nav>
+
+        <!-- Card Container -->
+        <div class="card_container">
+            {% for car in cars %}
+                <div class="card" loading="lazy">
+                    
+                    <!-- Card Image with "Not Available" Overlay if needed -->
+                    <div class="card-image" style="position: relative;">
+                        <img src="{{ url_for('static', filename='images/' + car.image) if car.image else url_for('static', filename='images/default-car.jpg') }}" 
+                            alt="{{ car.brand }} {{ car.model }}" 
+                            class="image">
+                        
+                        {% if car.available != "Available" %}
+                            <div class="not-available-overlay">
+                                Not Available
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ car.brand }} {{ car.model }}</h3>
+                            <div class="card-badge">{{ car.category }}</div>
+                        </div>
+                        <p class="card-details">
+                            <span>{{ car.seating_capacity }} Seats</span>
+                            <span>{{ car.transmission }}</span>
+                            <span>{{ car.fuel_type }}</span>
+                        </p>
+                    </div>
+
+                    <!-- Price Info -->
+                    <div class="card-price">
+                        <div class="price">${{ car.price_per_day }} <span class="price-label">per day</span></div>
+                    </div>
+
+                    <!-- Button Actions -->
+                    <div class="card-actions">
+                        {% if car.available == "Available" %}
+                            <a href="{{ url_for('car.car_details', car_id=car.id) }}" class="card-button">View Details</a>
+                        {% else %}
+                            <a class="card-button" style="
+                                pointer-events: none;
+                                background-color: #f8d7da;
+                                color: #a00;
+                                border: 1px solid #a00;
+                                cursor: not-allowed;
+                            ">Not Available</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer">
+            <h2 class="foot_text">© 2025 Car Rental System. All rights reserved.</h2>
+        </div>
+    </footer>
+</body>
+<script>
+    window.onload = function() {
+      const toasts = document.querySelectorAll('.toast');
+      toasts.forEach(function(toast) {
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(-100%)';
+          setTimeout(() => toast.remove(), 500); // remove after animation
+        }, 3000); // 3 seconds
+      });
+    };
+  </script>  
+</html>

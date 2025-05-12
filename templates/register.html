@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Register</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('auth.register') }}">
+            <div class="first_last_name">
+                <div class="first_name">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" required placeholder="Enter first name">
+                </div>
+                <div class="last_name">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" required placeholder="Enter last name">
+                </div>
+            </div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required placeholder="Enter username">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required placeholder="Enter password">
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address" required placeholder="Enter address">
+            <label for="balance">Balance:</label>
+            <input type="number" name="balance" id="balance" required placeholder="Enter account balance">
+            <button type="submit">Register</button>
+        </form>
+        <p>
+            Already have an account
+            <a href="/login">Login here</a>
+        </p>
+    </div>
+</body>
+<script>
+    // Automatically hide flash messages after 3 seconds (3000 ms)
+    setTimeout(function() {
+      const flashMessages = document.getElementById('flash-messages');
+      if (flashMessages) {
+        flashMessages.style.display = 'none';
+      }
+    }, 3000);  // 3 seconds
+  </script>
+</html>

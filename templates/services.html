@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Car Rental System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/services.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Upper Navigation Bar -->
+    <nav class="navbar">
+        <a href="{{ url_for('main.main') }}" class="logo">Rental Car System</a>
+        <ul class="nav_list">
+            <li><a href="{{ url_for('main.main') }}" class="nav-btn">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}" class="nav-btn">About</a></li>
+            <li><a href="{{ url_for('main.services') }}" class="nav-btn">Services</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="nav-btn">Contact</a></li>
+        </ul>
+    </nav>
+      <!-- Services Section -->
+      <section class="services-section">
+          <div class="container">
+              <h1 class="title">Our Services</h1>
+              <div class="services-grid">
+                  <div class="service-card fade-in">
+                      <img src="/static/images/rent_car.jpg" alt="Car Rentals">
+                      <h2>Flexible Car Rentals</h2>
+                      <p>Choose from daily, weekly, or monthly rentals. Drive the car you need, when you need it—without the stress.</p>
+                  </div>
+
+                  <div class="service-card fade-in delay-1">
+                      <img src="/static/images/Rolles_Royce_phantom.jpg" alt="Luxury Vehicles">
+                      <h2>Luxury Vehicle Options</h2>
+                      <p>Need a premium ride for a special occasion? We offer high-end models that combine comfort and class.</p>
+                  </div>
+
+                  <div class="service-card fade-in delay-2">
+                      <img src="/static/images/customer_support.jpeg" alt="24/7 Support">
+                      <h2>24/7 Customer Support</h2>
+                      <p>Our friendly support team is here for you any time—before, during, or after your trip.</p>
+                  </div>
+
+                  <div class="service-card fade-in delay-3">
+                      <img src="/static/images/well_maintained_cars.jpeg" alt="Vehicle Maintenance">
+                      <h2>Well-Maintained Fleet</h2>
+                      <p>All vehicles are regularly inspected, sanitized, and maintained to ensure safety and peace of mind.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+</body>
+</html>

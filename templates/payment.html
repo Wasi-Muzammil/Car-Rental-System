@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='payment.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Payment Form</title>
+</head>
+<body>
+    <div class="payment-container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <h2>Available Balance</h2>
+        <h1>${{ balance }}</h1> 
+        <form method="POST" action="{{ url_for('payment.payment')}}">
+            <hr>
+            <label for="add_balance">Deposit Balance To Account</label>
+            <input type="number" id="add_balance" name="add_balance" min="1" placeholder="Enter amount to deposit">
+
+            <label for="withdraw_balance">Withdraw Balance From Account</label>
+            <input type="number" id="withdraw_balance" name="withdraw_balance" min="1" placeholder="Enter amount to withdraw">
+
+            <div class="payment-buttons">
+                <a href="{{ url_for('main.main') }}">
+                    <button type="button">Back</button>
+                </a>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    // Automatically hide flash messages after 3 seconds (3000 ms)
+    setTimeout(function() {
+      const flashMessages = document.getElementById('flash-messages');
+      if (flashMessages) {
+        flashMessages.style.display = 'none';
+      }
+    }, 3000);  // 3 seconds
+  </script>
+</html>

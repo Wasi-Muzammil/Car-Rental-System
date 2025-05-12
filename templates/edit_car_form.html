@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit_car_form.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %} -->
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">
+                {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <h1>Edit Car</h1>
+        <form method="POST" action="{{ url_for('admin.update_car', car_id=car.id) }}">
+            <div class="form-add-container">
+                <div class="box-add">
+                    <div class="form-group">
+                        <label class="form-label" for="car-brand">Brand</label>
+                        <input type="text" name="brand" class="form-input" value="{{ car.brand }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-model">Model</label>
+                        <input type="text" name="model" class="form-input" value="{{ car.model }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-year">Year</label>
+                        <input type="number" name="year" class="form-input" value="{{ car.year }}" required>
+                    </div>
+
+                    <div class="form-group"> 
+                        <label class="form-label" for="car-category">Category</label>
+                        <select name="category" class="form-select" required>
+                            <option value="sedan" {% if car.category == "sedan" %}selected{% endif %}>Sedan</option>
+                            <option value="suv" {% if car.category == "suv" %}selected{% endif %}>SUV</option>
+                            <option value="hatchback" {% if car.category == "hatchback" %}selected{% endif %}>Hatchback</option>
+                            <option value="luxury" {% if car.category == "luxury" %}selected{% endif %}>Luxury</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-seats">Seats</label>
+                        <input type="number" name="seating_capacity" class="form-input" value="{{ car.seating_capacity }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-transmission">Transmission</label>
+                        <select name="transmission" class="form-select" required>
+                            <option value="Automatic" {% if car.transmission == "Automatic" %}selected{% endif %}>Automatic</option>
+                            <option value="Manual" {% if car.transmission == "Manual" %}selected{% endif %}>Manual</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-fuel">Fuel Type</label>
+                        <select name="fuel_type" class="form-select" required>
+                            <option value="Petrol" {% if car.fuel_type == "Petrol" %}selected{% endif %}>Petrol</option>
+                            <option value="Diesel" {% if car.fuel_type == "Diesel" %}selected{% endif %}>Diesel</option>
+                            <option value="Electric" {% if car.fuel_type == "Electric" %}selected{% endif %}>Electric</option>
+                            <option value="Hybrid" {% if car.fuel_type == "Hybrid" %}selected{% endif %}>Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-price">Daily Rate ($)</label>
+                        <input type="number" name="price_per_day" class="form-input" value="{{ car.price_per_day }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-description">Description</label>
+                        <input type="text" name="description" class="form-input" value="{{ car.description }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-image">Image Address</label>
+                        <input type="text" name="image" class="form-input" value="{{ car.image }}" required>
+                    </div>                     
+
+                    <div class="form-group">
+                        <label class="form-label" for="car-availability">Availability</label>
+                        <select name="available" class="form-select" required>
+                            <option value="Available" {% if car.available == "Available" %}selected{% endif %}>Available</option>
+                            <option value="Not Available" {% if car.available == "Not Available" %}selected{% endif %}>Not Available</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{{ url_for('admin.cars') }}">
+                        <button type="button" class="admin-button button-primary">Back</button>
+                    </a>
+                    <button type="submit" class="button-primary admin-button">Update Car</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    // Automatically hide flash messages after 3 seconds (3000 ms)
+    setTimeout(function() {
+      const flashMessages = document.getElementById('flash-messages');
+      if (flashMessages) {
+        flashMessages.style.display = 'none';
+      }
+    }, 3000);  // 3 seconds
+  </script>
+</html>
