@@ -270,65 +270,65 @@ class CustomerDeleteView(AdminView):
 
         return redirect(url_for('admin.customers'))
 
-# class BasePDFView(AdminView):
-#     """
-#     Base class for generating PDF reports.
-#     Provides common functionality for PDF generation.
-#     """
+class BasePDFView(AdminView):
+    """
+    Base class for generating PDF reports.
+    Provides common functionality for PDF generation.
+    """
 
-#     pdf_template = None
-#     filename = "report.pdf"
+    pdf_template = None
+    filename = "report.pdf"
 
-#     def get_pdf_data(self):
-#         return {}
+    def get_pdf_data(self):
+        return {}
 
-#     def get(self):
-#         if not super().is_admin():
-#             flash("Unauthorized", "error")
-#             return redirect(url_for("auth.login"))
+    def get(self):
+        if not super().is_admin():
+            flash("Unauthorized", "error")
+            return redirect(url_for("auth.login"))
 
-#         html = render_template(self.pdf_template, **self.get_pdf_data())
-#         pdf_stream = BytesIO()
-#         pisa_status = pisa.CreatePDF(html, dest=pdf_stream)
+        html = render_template(self.pdf_template, **self.get_pdf_data())
+        pdf_stream = BytesIO()
+        pisa_status = pisa.CreatePDF(html, dest=pdf_stream)
 
-#         if pisa_status.err:
-#             return "PDF generation failed", 500
+        if pisa_status.err:
+            return "PDF generation failed", 500
 
-#         response = make_response(pdf_stream.getvalue())
-#         response.headers['Content-Type'] = 'application/pdf'
-#         response.headers['Content-Disposition'] = f'attachment; filename={self.filename}'
-#         return response
+        response = make_response(pdf_stream.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename={self.filename}'
+        return response
 
-# class RentalReportPDFView(BasePDFView):
-#     """
-#     Rental Report PDF View
-#     Handles generating a PDF report of all rentals,
-#     with customer details.
-#     """
+class RentalReportPDFView(BasePDFView):
+    """
+    Rental Report PDF View
+    Handles generating a PDF report of all rentals,
+    with customer details.
+    """
 
-#     pdf_template = "rental_report.html"
-#     filename = "rental_report.pdf"
+    pdf_template = "rental_report.html"
+    filename = "rental_report.pdf"
 
-#     def get_pdf_data(self):
-#         users = User.query.all()
-#         customer_rentals = [
-#             {"user": u, "rentals": Booking.query.filter_by(user_id=u.id).all()}
-#             for u in users if Booking.query.filter_by(user_id=u.id).count()
-#         ]
-#         return {"customer_rentals": customer_rentals}
+    def get_pdf_data(self):
+        users = User.query.all()
+        customer_rentals = [
+            {"user": u, "rentals": Booking.query.filter_by(user_id=u.id).all()}
+            for u in users if Booking.query.filter_by(user_id=u.id).count()
+        ]
+        return {"customer_rentals": customer_rentals}
     
-# class ReservedCarsPDFView(BasePDFView):
-#     """
-#     Reserved Cars PDF View
-#     Handles generating a PDF report of all reserved cars.
-#     """
+class ReservedCarsPDFView(BasePDFView):
+    """
+    Reserved Cars PDF View
+    Handles generating a PDF report of all reserved cars.
+    """
 
-#     pdf_template = "reserved_car_report.html"
-#     filename = "reserved_cars_report.pdf"
+    pdf_template = "reserved_car_report.html"
+    filename = "reserved_cars_report.pdf"
 
-#     def get_pdf_data(self):
-#         reserved_cars = Car.query.filter_by(available="Not Available").all()
-#         return {"reserved_cars": reserved_cars}
+    def get_pdf_data(self):
+        reserved_cars = Car.query.filter_by(available="Not Available").all()
+        return {"reserved_cars": reserved_cars}
 
 # Registering the routes with the blueprint
 
@@ -380,12 +380,12 @@ admin_bp.add_url_rule(
     view_func=CustomerDeleteView.as_view('delete_user'),
     methods=["POST"]
 )
-# admin_bp.add_url_rule(
-#     '/admin/rental-report/pdf',
-#     view_func=RentalReportPDFView.as_view('rental_report_pdf')
-# )
+admin_bp.add_url_rule(
+    '/admin/rental-report/pdf',
+    view_func=RentalReportPDFView.as_view('rental_report_pdf')
+)
 
-# admin_bp.add_url_rule(
-#     '/admin/reports/reserved_cars_pdf',
-#     view_func=ReservedCarsPDFView.as_view('reserved_cars_pdf')
-# )
+admin_bp.add_url_rule(
+    '/admin/reports/reserved_cars_pdf',
+    view_func=ReservedCarsPDFView.as_view('reserved_cars_pdf')
+)
